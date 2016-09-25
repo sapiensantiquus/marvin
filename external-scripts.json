@@ -5,6 +5,5 @@
     "hubot-rules",
     "hubot-jenkins-enhanced",
     "hubot-s3-brain",
-    "hubot-marvin",
-    "hubot-slack-whitelist-middleware"
+    "hubot-marvin"
 ]
