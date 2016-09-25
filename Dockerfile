@@ -12,9 +12,9 @@ RUN npm install --save https://github.com/mGageTechOps/hubot-s3-brain/tarball/ma
     npm install hubot-jenkins-enhanced --save &&\
     npm install shelljs --save &&\
     npm install hubot-alias --save &&\
-    npm install hubot-slack-whitelist-middleware --save &&\
     npm install hubot-marvin --save
 ADD external-scripts.json .
 ADD send-sns.coffee ./scripts/send-sns.coffee
+ADD whitelist.coffee ./scripts/whitelist.coffee
 CMD HUBOT_SLACK_TOKEN=$(credstash -r ${CREDSTASH_REGION} get -n ${CREDSTASH_REF_SLACKTOKEN}) \
     bin/hubot --adapter slack
