@@ -30,6 +30,12 @@ send_sns = (robot, topic, message, res) ->
         res.reply "Success, message:#{message} topic:#{topic} output:#{output}"
 
 module.exports = (robot) ->
+  robot.on "send-sns", (res, message) ->
+    res.reply "#{message}"
+    topic="#{process.env.SNS_TOPIC_ARN}"
+    send_sns(robot, topic, message, res)
+
+
   robot.respond /deploy s3_path:(.*) role:(.*) playbook:(.*) inventory:(.*) extra_vars:(.*)/i, (res) ->
     message = JSON.stringify {
       s3_path: res.match[1]
@@ -38,5 +44,4 @@ module.exports = (robot) ->
       inventory: res.match[4]
       extra_vars: res.match[5]
     }
-    topic="#{process.env.SNS_TOPIC_ARN}"
-    send_sns(robot, topic, message, res)
+    robot.emit "send-sns", res, message

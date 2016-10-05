@@ -1,4 +1,5 @@
 FROM alpine:3.4
+
 RUN apk update &&\
     apk upgrade &&\
     apk add git nodejs py-pip openssl libc-dev python-dev gcc &&\
@@ -12,7 +13,8 @@ RUN npm install --save https://github.com/mGageTechOps/hubot-s3-brain/tarball/ma
     npm install hubot-jenkins-enhanced --save &&\
     npm install shelljs --save &&\
     npm install hubot-alias --save &&\
-    npm install hubot-marvin --save
+    npm install hubot-marvin --save &&\
+    npm install aws-sdk --save 
 ADD external-scripts.json .
 ADD scripts ./scripts/
 CMD HUBOT_SLACK_TOKEN=$(credstash -r ${CREDSTASH_REGION} get -n ${CREDSTASH_REF_SLACKTOKEN}) \
